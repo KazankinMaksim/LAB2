@@ -2,7 +2,7 @@
 
 // Конструктор класса RouteCipher
 RouteCipher::RouteCipher(int k) {
-    key = k;
+    key = getValidKey(std::to_string(k));
 }
 
 // Функция для шифрования текста
@@ -103,3 +103,4 @@ int RouteCipher::getValidKey(const std::string & key) {
     else
         throw cipher_error(std::string("Invalid key ")+key);
 }
+

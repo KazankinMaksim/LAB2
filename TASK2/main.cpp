@@ -5,7 +5,8 @@ void check(const string& text, const string& key)
     try {
         string cipherText;
         string decryptedText;
-        RouteCipher cipher(RouteCipher::getValidKey(key));
+        int keyInt = std::stoi(key);
+		RouteCipher cipher(keyInt);
         cipherText = cipher.encrypt(text);
         decryptedText = cipher.decrypt(cipherText);
         cout<<"Key:"<<key<<endl;
@@ -21,9 +22,7 @@ void check(const string& text, const string& key)
 
 int main()
 {
-    check("PIXEL","0");
-	cout << "-------------" << endl;
-    check("PIXEL","");
+    check("PIXEL","-1");
 	cout << "-------------" << endl;
     check("ЯТУТЖИВУ","3");
 	cout << "-------------" << endl;
