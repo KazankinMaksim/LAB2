@@ -6,18 +6,23 @@ void check(const string& text, const string& key)
         string cipherText;
         string decryptedText;
         int keyInt = std::stoi(key);
-		RouteCipher cipher(keyInt);
-        cipherText = cipher.encrypt(text);
-        decryptedText = cipher.decrypt(cipherText);
-        cout<<"Key:"<<key<<endl;
-        cout<<"Text:"<<text<<endl;
-        cout<<"Encrypted text: "<<cipherText<<endl;
-        cout<<"Decrypted text: "<<decryptedText<<endl;
+        RouteCipher cipher(keyInt); // Используйте keyInt для создания cipher
+        try {
+            cipherText = cipher.encrypt(text); // Шифруйте текст перед его расшифровкой
+            decryptedText = cipher.decrypt(cipherText);
+            cout<<"Key:"<<key<<endl;
+            cout<<"Text:"<<text<<endl;
+            cout<<"Encrypted text: "<<cipherText<<endl;
+            cout<<"Decrypted text: "<<decryptedText<<endl;
+        } catch (const invalid_argument& e) {
+            cerr << "Ошибка: " << e.what() << '\n';
+        }
     } catch (const cipher_error & e) {
         cerr<<"Error: "<<e.what()<<endl;
     }
     cout<<""<<endl;
 }
+
 
 
 int main()
