@@ -2,7 +2,8 @@
 
 // Конструктор класса RouteCipher
 RouteCipher::RouteCipher(int k) {
-    key = getValidKey(std::to_string(k));
+    if (k < 2)
+        throw std::invalid_argument("Wrong key");
 }
 
 // Функция для шифрования текста
@@ -86,6 +87,9 @@ string RouteCipher::getValidText(const std::string & text) {
     if (text.empty()) {
         throw cipher_error("Input text cannot be empty");
     }
+    // Проверка длины ключа
+    if (key > text.length()) {
+        throw cipher_error("Key length cannot be greater than text length");
     // Проверка на недопустимые символы
     for (char c : text) {
         if (!isalpha(c)) {
@@ -95,12 +99,4 @@ string RouteCipher::getValidText(const std::string & text) {
     // Возвращаем длину строки, если все проверки пройдены
     return text;
 }
-int RouteCipher::getValidKey(const std::string & key) {
-    if (key.empty())
-        throw cipher_error("Empty key");
-    if (stoi(key) > 0)
-        return stoi(key);
-    else
-        throw cipher_error(std::string("Invalid key ")+key);
 }
-
